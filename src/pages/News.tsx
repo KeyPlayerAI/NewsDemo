@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { NewsCard } from '../components/NewsCard';
 import { SearchIcon, Filter } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import './News.css';
 
 // Mock data for news articles
@@ -87,6 +88,11 @@ export const News: React.FC = () => {
     article.excerpt.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const handleReadMore = (e: React.MouseEvent) => {
+    e.preventDefault();
+    // Handle read more click - can be implemented later
+  };
+
   return (
     <div className="news-page">
       <div className="page-header">
@@ -123,7 +129,7 @@ export const News: React.FC = () => {
             <span className="featured-author">By John Anderson</span>
             <span className="featured-time">1 hour ago</span>
           </div>
-          <button className="read-more-btn">Read Full Story</button>
+          <button onClick={handleReadMore} className="read-more-btn">Read Full Story</button>
         </div>
       </div>
       
