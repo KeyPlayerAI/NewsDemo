@@ -278,10 +278,6 @@
   .menu-button {
     display: flex;
   }
-
-  .mobile-nav {
-    display: none;
-  }
 }
 
 /* Touch feedback */

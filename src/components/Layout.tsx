@@ -17,7 +17,6 @@ interface LayoutProps {
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isRefreshing, setIsRefreshing] = useState(false);
   const isMobile = useMediaQuery('(max-width: 768px)');
   const navigate = useNavigate();
   const location = useLocation();
@@ -40,65 +39,6 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
     setMobileMenuOpen(false);
   }, [location.pathname]);
 
-  // Handle pull-to-refresh
-  useEffect(() => {
-    if (!isMobile) return;
-
-    let startY = 0;
-    let currentY = 0;
-    let refreshing = false;
-    
-    const handleTouchStart = (e: TouchEvent) => {
-      startY = e.touches[0].pageY;
-      currentY = startY;
-    };
-    
-    const handleTouchMove = (e: TouchEvent) => {
-      if (refreshing) return;
-      
-      currentY = e.touches[0].pageY;
-      const pull = currentY - startY;
-      
-      if (window.scrollY === 0 && pull > 0) {
-        e.preventDefault();
-        document.body.style.transform = `translateY(${Math.min(pull / 2, 75)}px)`;
-      }
-    };
-    
-    const handleTouchEnd = async () => {
-      if (refreshing) return;
-      
-      const pull = currentY - startY;
-      
-      if (pull > 75) {
-        refreshing = true;
-        setIsRefreshing(true);
-        document.body.style.transform = 'translateY(0)';
-        
-        try {
-          await new Promise(resolve => setTimeout(resolve, 1000));
-          window.location.reload();
-        } catch (error) {
-          console.error('Error refreshing:', error);
-          setIsRefreshing(false);
-          refreshing = false;
-        }
-      } else {
-        document.body.style.transform = 'translateY(0)';
-      }
-    };
-
-    document.addEventListener('touchstart', handleTouchStart, { passive: true });
-    document.addEventListener('touchmove', handleTouchMove, { passive: false });
-    document.addEventListener('touchend', handleTouchEnd, { passive: true });
-
-    return () => {
-      document.removeEventListener('touchstart', handleTouchStart);
-      document.removeEventListener('touchmove', handleTouchMove);
-      document.removeEventListener('touchend', handleTouchEnd);
-    };
-  }, [isMobile]);
-
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
@@ -111,12 +51,6 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       document.body.style.overflow = '';
     };
   }, [mobileMenuOpen]);
-
-  const handleNavLinkClick = (e: React.MouseEvent) => {
-    if (isRefreshing) {
-      e.preventDefault();
-    }
-  };
 
   return (
     <div className="layout">
@@ -133,35 +67,30 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                   to="/" 
                   className={({ isActive }) => `desktop-nav-link ${isActive ? 'active' : ''}`} 
                   end
-                  onClick={handleNavLinkClick}
                 >
                   Home
                 </NavLink>
                 <NavLink 
                   to="/news" 
                   className={({ isActive }) => `desktop-nav-link ${isActive ? 'active' : ''}`}
-                  onClick={handleNavLinkClick}
                 >
                   News
                 </NavLink>
                 <NavLink 
                   to="/sports" 
                   className={({ isActive }) => `desktop-nav-link ${isActive ? 'active' : ''}`}
-                  onClick={handleNavLinkClick}
                 >
                   Sports
                 </NavLink>
                 <NavLink 
                   to="/weather" 
                   className={({ isActive }) => `desktop-nav-link ${isActive ? 'active' : ''}`}
-                  onClick={handleNavLinkClick}
                 >
                   Weather
                 </NavLink>
                 <NavLink 
                   to="/community" 
                   className={({ isActive }) => `desktop-nav-link ${isActive ? 'active' : ''}`}
-                  onClick={handleNavLinkClick}
                 >
                   Community
                 </NavLink>
@@ -194,13 +123,6 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       </header>
       
       <main className="main-content">
-        {isRefreshing && (
-          <div className="ptr-element">
-            <div className="ptr-icon">
-              <div className="animate-spin h-6 w-6 border-2 border-primary border-t-transparent rounded-full" />
-            </div>
-          </div>
-        )}
         {children}
       </main>
 
@@ -217,7 +139,6 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               to="/" 
               className={({ isActive }) => `mobile-menu-link ${isActive ? 'active' : ''}`} 
               end
-              onClick={handleNavLinkClick}
             >
               <Home size={20} />
               <span>Home</span>
@@ -225,7 +146,6 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             <NavLink 
               to="/news" 
               className={({ isActive }) => `mobile-menu-link ${isActive ? 'active' : ''}`}
-              onClick={handleNavLinkClick}
             >
               <NewspaperIcon size={20} />
               <span>News</span>
@@ -233,7 +153,6 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             <NavLink 
               to="/sports" 
               className={({ isActive }) => `mobile-menu-link ${isActive ? 'active' : ''}`}
-              onClick={handleNavLinkClick}
             >
               <ActivityIcon size={20} />
               <span>Sports</span>
@@ -241,7 +160,6 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             <NavLink 
               to="/weather" 
               className={({ isActive }) => `mobile-menu-link ${isActive ? 'active' : ''}`}
-              onClick={handleNavLinkClick}
             >
               <CloudIcon size={20} />
               <span>Weather</span>
@@ -249,7 +167,6 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             <NavLink 
               to="/community" 
               className={({ isActive }) => `mobile-menu-link ${isActive ? 'active' : ''}`}
-              onClick={handleNavLinkClick}
             >
               <CalendarIcon size={20} />
               <span>Community</span>
