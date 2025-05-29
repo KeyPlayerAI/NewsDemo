@@ -1,6 +1,7 @@
 import React from 'react';
 import { NewsCard } from '../components/NewsCard';
 import { Trophy } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import './Sports.css';
 
 // Mock data for sports articles
@@ -129,6 +130,16 @@ const upcomingGames = [
 ];
 
 export const Sports: React.FC = () => {
+  const handleViewSchedule = (e: React.MouseEvent) => {
+    e.preventDefault();
+    // Handle view schedule click - can be implemented later
+  };
+
+  const handleVote = (e: React.MouseEvent) => {
+    e.preventDefault();
+    // Handle vote click - can be implemented later
+  };
+
   return (
     <div className="sports-page">
       <div className="page-header">
@@ -150,13 +161,13 @@ export const Sports: React.FC = () => {
                 <span className="featured-author">By Robert Davis</span>
                 <span className="featured-time">Yesterday</span>
               </div>
-              <button className="read-more-btn sports-btn">Read Full Story</button>
+              <button onClick={(e) => e.preventDefault()} className="read-more-btn sports-btn">Read Full Story</button>
             </div>
           </div>
           
           <div className="section-heading">
             <h2>Latest Sports News</h2>
-            <button className="view-all-link">View All</button>
+            <button onClick={(e) => e.preventDefault()} className="view-all-link">View All</button>
           </div>
           
           <div className="sports-grid">
@@ -221,7 +232,7 @@ export const Sports: React.FC = () => {
                 </div>
               ))}
             </div>
-            <button className="view-all-games">View Full Schedule</button>
+            <button onClick={handleViewSchedule} className="view-all-games">View Full Schedule</button>
           </div>
           
           <div className="sports-poll">
@@ -249,7 +260,7 @@ export const Sports: React.FC = () => {
                 <label htmlFor="team4">Other</label>
               </div>
             </div>
-            <button className="vote-btn">Vote</button>
+            <button onClick={handleVote} className="vote-btn">Vote</button>
           </div>
         </div>
       </div>

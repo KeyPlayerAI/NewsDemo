@@ -21,8 +21,13 @@ export const NewsCard: React.FC<NewsCardProps> = ({
 }) => {
   const categoryClass = `category-badge category-${category}`;
   
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    // Handle card click - can be implemented later
+  };
+  
   return (
-    <div className="news-card animate-fade-in">
+    <div className="news-card animate-fade-in" onClick={handleClick}>
       <div className="news-card-image">
         <img src={image} alt={title} />
         <div className={categoryClass}>
