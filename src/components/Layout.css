@@ -1,3 +1,4 @@
+/* Existing CSS */
 .layout {
   display: flex;
   flex-direction: column;
@@ -24,6 +25,67 @@
   max-width: 1600px;
   margin: 0 auto;
   width: 100%;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.menu-button {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.menu-button:hover {
+  opacity: 0.8;
+}
+
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  margin-left: 2rem;
+}
+
+.desktop-nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.desktop-nav-link {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.5rem;
+  transition: color 0.2s;
+  position: relative;
+}
+
+.desktop-nav-link:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.desktop-nav-link.active {
+  color: white;
+}
+
+.desktop-nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--accent);
+  border-radius: 1px;
 }
 
 .header-right {
@@ -121,6 +183,14 @@
 
 @media (max-width: 768px) {
   .mobile-nav {
+    display: flex;
+  }
+
+  .desktop-nav {
+    display: none;
+  }
+
+  .menu-button {
     display: flex;
   }
 }

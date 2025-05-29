@@ -3,8 +3,7 @@ import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { useMediaQuery } from '../hooks/useMediaQuery';
 import { 
   NewspaperIcon, ActivityIcon, CloudIcon, CalendarIcon, 
-  BellIcon, UserIcon, LogOut,
-  Home
+  BellIcon, UserIcon, LogOut, Home, Menu
 } from 'lucide-react';
 import { Logo } from './Logo';
 import { SubscriptionStatus } from './SubscriptionStatus';
@@ -18,6 +17,7 @@ interface LayoutProps {
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isMobile = useMediaQuery('(max-width: 768px)');
   const navigate = useNavigate();
   const location = useLocation();
@@ -85,7 +85,31 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
     <div className="layout">
       <header className="header">
         <div className="header-container">
-          <Logo />
+          <div className="header-left">
+            <button className="menu-button" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+              <Menu size={24} />
+            </button>
+            <Logo />
+            <nav className="desktop-nav">
+              <div className="desktop-nav-links">
+                <NavLink to="/" className={({ isActive }) => `desktop-nav-link ${isActive ? 'active' : ''}`} end>
+                  Home
+                </NavLink>
+                <NavLink to="/news" className={({ isActive }) => `desktop-nav-link ${isActive ? 'active' : ''}`}>
+                  News
+                </NavLink>
+                <NavLink to="/sports" className={({ isActive }) => `desktop-nav-link ${isActive ? 'active' : ''}`}>
+                  Sports
+                </NavLink>
+                <NavLink to="/weather" className={({ isActive }) => `desktop-nav-link ${isActive ? 'active' : ''}`}>
+                  Weather
+                </NavLink>
+                <NavLink to="/community" className={({ isActive }) => `desktop-nav-link ${isActive ? 'active' : ''}`}>
+                  Community
+                </NavLink>
+              </div>
+            </nav>
+          </div>
           
           <div className="header-right">
             <button className="icon-button">
@@ -115,9 +139,9 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         {isRefreshing && (
           <div className="ptr-element">
             <div className="ptr-icon">
-              <svg className="animate-spin\" viewBox="0 0 24 24\" width="24\" height="24">
-                <circle className="opacity-25\" cx="12\" cy="12\" r="10\" stroke="currentColor\" strokeWidth="4\" fill="none" />
-                <path className="opacity-75\" fill="currentColor\" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+              <svg className="animate-spin" viewBox="0 0 24 24" width="24" height="24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
               </svg>
             </div>
           </div>
