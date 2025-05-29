@@ -3,7 +3,7 @@ import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { useMediaQuery } from '../hooks/useMediaQuery';
 import { 
   NewspaperIcon, ActivityIcon, CloudIcon, CalendarIcon, 
-  BellIcon, UserIcon, LogOut, Home, Menu
+  BellIcon, UserIcon, LogOut, Home, Menu, X
 } from 'lucide-react';
 import { Logo } from './Logo';
 import { SubscriptionStatus } from './SubscriptionStatus';
@@ -16,8 +16,8 @@ interface LayoutProps {
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
-  const [isRefreshing, setIsRefreshing] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const isMobile = useMediaQuery('(max-width: 768px)');
   const navigate = useNavigate();
   const location = useLocation();
@@ -34,6 +34,11 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       console.error('Error logging out:', error);
     }
   };
+
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
 
   // Handle pull-to-refresh
   useEffect(() => {
@@ -80,6 +85,19 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       }
     };
   }, [isMobile]);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
 
   return (
     <div className="layout">
@@ -139,40 +157,48 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         {isRefreshing && (
           <div className="ptr-element">
             <div className="ptr-icon">
-              <svg className="animate-spin\" viewBox="0 0 24 24\" width="24\" height="24">
-                <circle className="opacity-25\" cx="12\" cy="12\" r="10\" stroke="currentColor\" strokeWidth="4\" fill="none" />
-                <path className="opacity-75\" fill="currentColor\" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+              <svg className="animate-spin" viewBox="0 0 24 24" width="24" height="24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
               </svg>
             </div>
           </div>
         )}
         {children}
       </main>
-      
-      <nav className="mobile-nav">
-        <div className="mobile-nav-links">
-          <NavLink to="/" className={({ isActive }) => `mobile-nav-link ${isActive ? 'active' : ''}`} end>
-            <Home size={20} />
-            <span>Home</span>
-          </NavLink>
-          <NavLink to="/news" className={({ isActive }) => `mobile-nav-link ${isActive ? 'active' : ''}`}>
-            <NewspaperIcon size={20} />
-            <span>News</span>
-          </NavLink>
-          <NavLink to="/sports" className={({ isActive }) => `mobile-nav-link ${isActive ? 'active' : ''}`}>
-            <ActivityIcon size={20} />
-            <span>Sports</span>
-          </NavLink>
-          <NavLink to="/weather" className={({ isActive }) => `mobile-nav-link ${isActive ? 'active' : ''}`}>
-            <CloudIcon size={20} />
-            <span>Weather</span>
-          </NavLink>
-          <NavLink to="/community" className={({ isActive }) => `mobile-nav-link ${isActive ? 'active' : ''}`}>
-            <CalendarIcon size={20} />
-            <span>Events</span>
-          </NavLink>
+
+      <div className={`mobile-menu ${mobileMenuOpen ? 'open' : ''}`} onClick={() => setMobileMenuOpen(false)}>
+        <div className="mobile-menu-content" onClick={e => e.stopPropagation()}>
+          <div className="mobile-menu-header">
+            <Logo />
+            <button className="mobile-menu-close" onClick={() => setMobileMenuOpen(false)}>
+              <X size={24} />
+            </button>
+          </div>
+          <nav className="mobile-menu-nav">
+            <NavLink to="/" className={({ isActive }) => `mobile-menu-link ${isActive ? 'active' : ''}`} end>
+              <Home size={20} />
+              <span>Home</span>
+            </NavLink>
+            <NavLink to="/news" className={({ isActive }) => `mobile-menu-link ${isActive ? 'active' : ''}`}>
+              <NewspaperIcon size={20} />
+              <span>News</span>
+            </NavLink>
+            <NavLink to="/sports" className={({ isActive }) => `mobile-menu-link ${isActive ? 'active' : ''}`}>
+              <ActivityIcon size={20} />
+              <span>Sports</span>
+            </NavLink>
+            <NavLink to="/weather" className={({ isActive }) => `mobile-menu-link ${isActive ? 'active' : ''}`}>
+              <CloudIcon size={20} />
+              <span>Weather</span>
+            </NavLink>
+            <NavLink to="/community" className={({ isActive }) => `mobile-menu-link ${isActive ? 'active' : ''}`}>
+              <CalendarIcon size={20} />
+              <span>Community</span>
+            </NavLink>
+          </nav>
         </div>
-      </nav>
+      </div>
       
       <footer className="footer">
         <div className="footer-content">
