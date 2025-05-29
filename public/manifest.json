@@ -1,0 +1,21 @@
+{
+  "name": "Carroll County News",
+  "short_name": "CC News",
+  "description": "Your trusted source for local news in Carroll County",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F9FAFB",
+  "theme_color": "#1E3A8A",
+  "icons": [
+    {
+      "src": "https://plpupiqllkbomfomhwyt.supabase.co/storage/v1/object/sign/logo/66f8ddae-3ed3-4cef-9338-0d4d3a64e99b.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InN0b3JhZ2UtdXJsLXNpZ25pbmcta2V5XzJlYjI5ZmIxLTM4M2QtNDU5YS1hMWNlLTNmZmI5Y2Q3NTRiOCJ9.eyJ1cmwiOiJsb2dvLzY2ZjhkZGFlLTNlZDMtNGNlZi05MzM4LTBkNGQzYTY0ZTk5Yi5wbmciLCJpYXQiOjE3NDg0MTE3MDEsImV4cCI6MTc1MTAwMzcwMX0.pMokx6CkK9U1m16rOSHVBf9YGWZjFucTMmZwWAIFt2o",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://plpupiqllkbomfomhwyt.supabase.co/storage/v1/object/sign/logo/66f8ddae-3ed3-4cef-9338-0d4d3a64e99b.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InN0b3JhZ2UtdXJsLXNpZ25pbmcta2V5XzJlYjI5ZmIxLTM4M2QtNDU5YS1hMWNlLTNmZmI5Y2Q3NTRiOCJ9.eyJ1cmwiOiJsb2dvLzY2ZjhkZGFlLTNlZDMtNGNlZi05MzM4LTBkNGQzYTY0ZTk5Yi5wbmciLCJpYXQiOjE3NDg0MTE3MDEsImV4cCI6MTc1MTAwMzcwMX0.pMokx6CkK9U1m16rOSHVBf9YGWZjFucTMmZwWAIFt2o",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

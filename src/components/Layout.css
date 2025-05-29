@@ -1,0 +1,249 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  position: relative;
+}
+
+.header {
+  background-color: var(--primary);
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding-top: max(0.75rem, env(safe-area-inset-top));
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.icon-button {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.icon-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.user-button {
+  background-color: var(--accent);
+}
+
+.profile-menu-container {
+  position: relative;
+}
+
+.profile-menu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-width: 200px;
+  z-index: 50;
+}
+
+.profile-menu-subscription {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.profile-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  color: var(--text);
+  font-size: 0.875rem;
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.profile-menu-item:hover {
+  background-color: #F3F4F6;
+}
+
+.profile-menu-item svg {
+  color: #EF4444;
+}
+
+.main-content {
+  flex: 1;
+  padding: 1.5rem;
+  max-width: 100%;
+  padding-bottom: calc(4rem + env(safe-area-inset-bottom));
+  overflow-x: hidden;
+}
+
+.mobile-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 0.5rem 0 max(0.5rem, env(safe-area-inset-bottom));
+  box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+@media (max-width: 768px) {
+  .mobile-nav {
+    display: flex;
+  }
+}
+
+.mobile-nav-links {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.mobile-nav-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem;
+  color: var(--text);
+  font-size: 0.75rem;
+  text-decoration: none;
+  position: relative;
+  flex: 1;
+  max-width: 80px;
+}
+
+.mobile-nav-link svg {
+  margin-bottom: 0.25rem;
+  transition: transform 0.2s ease;
+}
+
+.mobile-nav-link.active {
+  color: var(--primary);
+}
+
+.mobile-nav-link.active svg {
+  transform: scale(1.1);
+}
+
+.mobile-nav-link span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  text-align: center;
+}
+
+.footer {
+  background-color: var(--primary);
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.875rem;
+  padding-bottom: max(1rem, calc(3.5rem + env(safe-area-inset-bottom)));
+}
+
+.footer a {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.footer a:hover {
+  color: white;
+}
+
+/* Pull-to-refresh animation */
+.ptr-element {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  color: var(--text);
+  z-index: 10;
+  text-align: center;
+  height: 50px;
+  transition: transform 0.2s;
+}
+
+.ptr-element .ptr-icon {
+  transform-origin: 50% 50%;
+  transition: transform 0.3s;
+  margin: auto;
+}
+
+.ptr-refresh .ptr-icon {
+  transform: rotate(180deg);
+}
+
+.ptr-loading .ptr-icon {
+  animation: ptr-loading 1s infinite linear;
+}
+
+@keyframes ptr-loading {
+  0% { transform: rotate(0); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Touch feedback */
+.mobile-nav-link:active {
+  opacity: 0.7;
+}
+
+.mobile-nav-link:active svg {
+  transform: scale(0.95);
+}
+
+.icon-button:active {
+  transform: scale(0.95);
+}
+
+/* Safe area insets */
+@supports (padding: max(0px)) {
+  .header {
+    padding-top: max(0.75rem, env(safe-area-inset-top));
+  }
+  
+  .mobile-nav {
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+  }
+  
+  .main-content {
+    padding-bottom: calc(4rem + max(0.5rem, env(safe-area-inset-bottom)));
+  }
+  
+  .footer {
+    padding-bottom: max(1rem, calc(3.5rem + env(safe-area-inset-bottom)));
+  }
+}

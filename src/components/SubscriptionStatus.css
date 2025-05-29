@@ -1,0 +1,22 @@
+.subscription-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 0.375rem;
+  color: white;
+  font-size: 0.875rem;
+}
+
+.subscription-status-icon {
+  color: #4ADE80;
+}
+
+.subscription-label {
+  font-weight: 500;
+}
+
+.subscription-name {
+  opacity: 0.9;
+}
