@@ -22,7 +22,9 @@ export const Landing: React.FC = () => {
       </nav>
 
       <main>
-        <section className="hero">
+        <section className="hero" style={{
+          background: `linear-gradient(to right, rgba(30, 58, 138, 0.85), rgba(30, 58, 138, 0.85)), url('https://plpupiqllkbomfomhwyt.supabase.co/storage/v1/object/sign/logo/496660720_122170012190352208_471954307878283933_n.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InN0b3JhZ2UtdXJsLXNpZ25pbmcta2V5XzJlYjI5ZmIxLTM4M2QtNDU5YS1hMWNlLTNmZmI5Y2Q3NTRiOCJ9.eyJ1cmwiOiJsb2dvLzQ5NjY2MDcyMF8xMjIxNzAwMTIxOTAzNTIyMDhfNDcxOTU0MzA3ODc4MjgzOTMzX24uanBnIiwiaWF0IjoxNzQ4NTQxOTU0LCJleHAiOjE3ODAwNzc5NTR9.gLadQOUDVeVEfebrZnwzqglEfg66LAgtd-tKMcumglA')`
+        }}>
           <div className="hero-content">
             <h1>Your Trusted Source for Local News</h1>
             <p>Stay connected with Carroll County's most comprehensive news coverage, featuring in-depth reporting, real-time updates, and community insights that matter to you.</p>
