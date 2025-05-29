@@ -150,6 +150,13 @@ export const Landing: React.FC = () => {
                   <span className="author-title">High School Coach</span>
                 </div>
               </div>
+              <div className="testimonial-card">
+                <p>"The community events calendar has helped me discover so many local activities. It's made me feel more connected to our town."</p>
+                <div className="testimonial-author">
+                  <span className="author-name">Emily Parker</span>
+                  <span className="author-title">Community Organizer</span>
+                </div>
+              </div>
             </div>
           </div>
         </section>
