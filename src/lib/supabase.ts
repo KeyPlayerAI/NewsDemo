@@ -15,38 +15,15 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
     persistSession: true,
     detectSessionInUrl: false,
     flowType: 'pkce',
-    storage: {
-      getItem: (key) => {
-        try {
-          return sessionStorage.getItem(key);
-        } catch (error) {
-          console.warn('Error accessing sessionStorage:', error);
-          return null;
-        }
-      },
-      setItem: (key, value) => {
-        try {
-          sessionStorage.setItem(key, value);
-        } catch (error) {
-          console.warn('Error setting sessionStorage:', error);
-        }
-      },
-      removeItem: (key) => {
-        try {
-          sessionStorage.removeItem(key);
-        } catch (error) {
-          console.warn('Error removing from sessionStorage:', error);
-        }
-      },
-    },
+    storage: localStorage,
   },
 });
 
 // Test storage access
 try {
-  sessionStorage.setItem('supabase-storage-test', 'test');
-  sessionStorage.removeItem('supabase-storage-test');
-  console.log('Session storage is accessible');
+  localStorage.setItem('supabase-storage-test', 'test');
+  localStorage.removeItem('supabase-storage-test');
+  console.log('Local storage is accessible');
 } catch (error) {
-  console.warn('Session storage is not accessible:', error);
+  console.warn('Local storage is not accessible:', error);
 }
