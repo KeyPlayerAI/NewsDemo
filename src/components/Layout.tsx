@@ -6,6 +6,7 @@ import {
   BellIcon, UserIcon, LogOut, Home, Menu, X
 } from 'lucide-react';
 import { Logo } from './Logo';
+import { ThemeToggle } from './ThemeToggle';
 import { SubscriptionStatus } from './SubscriptionStatus';
 import { supabase } from '../lib/supabase';
 import './Layout.css';
@@ -99,6 +100,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
           </div>
           
           <div className="header-right">
+            <ThemeToggle />
             <button className="icon-button">
               <BellIcon size={20} />
             </button>
