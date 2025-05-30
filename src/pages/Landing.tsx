@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { NewspaperIcon } from 'lucide-react';
 import { HeroSectionContent } from '../components/HeroSectionContent';
-import { Typewriter } from '../components/ui/typewriter';
+import { SubscriptionButton } from '../components/SubscriptionButton';
+import { products } from '../stripe-config';
 import './Landing.css';
 
 export const Landing: React.FC = () => {
@@ -22,33 +23,155 @@ export const Landing: React.FC = () => {
       </nav>
 
       <main>
-        <section className="hero" style={{
-          background: `linear-gradient(to right, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('https://plpupiqllkbomfomhwyt.supabase.co/storage/v1/object/sign/logo/Screenshot_30-5-2025_11320_bolt.new.jpeg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InN0b3JhZ2UtdXJsLXNpZ25pbmcta2V5XzJlYjI5ZmIxLTM4M2QtNDU5YS1hMWNlLTNmZmI5Y2Q3NTRiOCJ9.eyJ1cmwiOiJsb2dvL1NjcmVlbnNob3RfMzAtNS0yMDI1XzExMzIwX2JvbHQubmV3LmpwZWciLCJpYXQiOjE3NDg1ODU2MTYsImV4cCI6MTc4MDEyMTYxNn0.Nh3cV_9EG-YMJFTad8opaX5Pglw1Dyc8Ms2pdqnrK94')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center'
-        }}>
+        <section className="hero">
           <HeroSectionContent />
-          <div className="typewriter-container">
-            <p className="whitespace-pre-wrap text-2xl md:text-3xl lg:text-4xl font-normal text-white">
-              <span>{"We're here to "}</span>
-              <Typewriter
-                text={[
-                  "inform",
-                  "inspire",
-                  "connect",
-                  "empower",
-                  "serve our community",
-                ]}
-                speed={70}
-                className="text-blue-300"
-                waitTime={1500}
-                deleteSpeed={40}
-                cursorChar={"_"}
-              />
-            </p>
+        </section>
+
+        <section className="why-subscribe">
+          <div className="section-container">
+            <h2>Why Subscribe to Carroll County News?</h2>
+            <p className="section-subtitle">Join thousands of informed residents who trust us for their daily news</p>
+            
+            <div className="benefits-grid">
+              <div className="benefit-card">
+                <div className="benefit-icon">
+                  <NewspaperIcon size={32} />
+                </div>
+                <h3>Comprehensive Coverage</h3>
+                <p>Get access to exclusive stories, investigative reporting, and in-depth analysis of local issues that impact your community.</p>
+              </div>
+              <div className="benefit-card">
+                <div className="benefit-icon">
+                  <NewspaperIcon size={32} />
+                </div>
+                <h3>Breaking News Alerts</h3>
+                <p>Stay informed with instant notifications about important events, weather alerts, and breaking news in Carroll County.</p>
+              </div>
+              <div className="benefit-card">
+                <div className="benefit-icon">
+                  <NewspaperIcon size={32} />
+                </div>
+                <h3>Community Connection</h3>
+                <p>Engage with fellow community members, share perspectives, and stay connected to what matters in your neighborhood.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="features">
+          <h2>Everything You Need to Stay Informed</h2>
+          <div className="features-grid">
+            <div className="feature-card">
+              <NewspaperIcon size={32} />
+              <h3>Local News</h3>
+              <p>From city council meetings to school board decisions, stay updated on the issues that affect your daily life.</p>
+              <ul className="feature-list">
+                <li>City Government Coverage</li>
+                <li>Education Updates</li>
+                <li>Business Development</li>
+              </ul>
+            </div>
+            <div className="feature-card">
+              <NewspaperIcon size={32} />
+              <h3>Sports Coverage</h3>
+              <p>Comprehensive coverage of local sports, from high school athletics to community leagues.</p>
+              <ul className="feature-list">
+                <li>Live Game Updates</li>
+                <li>Player Profiles</li>
+                <li>Season Statistics</li>
+              </ul>
+            </div>
+            <div className="feature-card">
+              <NewspaperIcon size={32} />
+              <h3>Weather Updates</h3>
+              <p>Accurate, localized weather forecasts and alerts to help you plan your day.</p>
+              <ul className="feature-list">
+                <li>Real-time Forecasts</li>
+                <li>Severe Weather Alerts</li>
+                <li>Interactive Radar</li>
+              </ul>
+            </div>
+            <div className="feature-card">
+              <NewspaperIcon size={32} />
+              <h3>Community Events</h3>
+              <p>Your complete guide to local events, festivals, and community gatherings.</p>
+              <ul className="feature-list">
+                <li>Event Calendar</li>
+                <li>Local Festivals</li>
+                <li>Community Meetups</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section className="testimonials">
+          <div className="section-container">
+            <h2>What Our Readers Say</h2>
+            <div className="testimonials-grid">
+              <div className="testimonial-card">
+                <p>"Carroll County News has become my go-to source for staying informed about our community. The coverage is thorough and unbiased."</p>
+                <div className="testimonial-author">
+                  <span className="author-name">Sarah Johnson</span>
+                  <span className="author-title">Local Business Owner</span>
+                </div>
+              </div>
+              <div className="testimonial-card">
+                <p>"The weather alerts and community updates have been invaluable. It's like having a neighbor who always knows what's happening."</p>
+                <div className="testimonial-author">
+                  <span className="author-name">Michael Thompson</span>
+                  <span className="author-title">Resident Since 1990</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="cta">
+          <div className="cta-content">
+            <h2>Join Our Community Today</h2>
+            <p>Get unlimited access to Carroll County's most trusted news source. Stay informed, stay connected.</p>
+            <div className="cta-buttons">
+              <SubscriptionButton priceId={products['Carroll County News'].priceId} />
+              <Link to="/login" className="cta-button secondary">Already have an account?</Link>
+            </div>
           </div>
         </section>
       </main>
+
+      <footer className="landing-footer">
+        <div className="footer-content">
+          <div className="footer-grid">
+            <div className="footer-section">
+              <h4>About Us</h4>
+              <p>Carroll County News is your trusted source for local news, serving the community since 1925.</p>
+            </div>
+            <div className="footer-section">
+              <h4>Quick Links</h4>
+              <ul>
+                <li><Link to="/signup">Subscribe</Link></li>
+                <li><a href="#">Advertise</a></li>
+                <li><a href="#">Contact Us</a></li>
+              </ul>
+            </div>
+            <div className="footer-section">
+              <h4>Connect</h4>
+              <ul>
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">Instagram</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="footer-bottom">
+            <p>© 2025 Carroll County News. All rights reserved.</p>
+            <div className="footer-links">
+              <a href="#">Privacy Policy</a>
+              <a href="#">Terms of Service</a>
+              <a href="#">Accessibility</a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
