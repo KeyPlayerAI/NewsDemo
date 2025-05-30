@@ -1,9 +1,9 @@
 .news-card {
-  background-color: white;
+  background-color: var(--card-background);
   border-radius: 0.5rem;
   overflow: hidden;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s ease;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -72,7 +72,7 @@
 
 .news-card-excerpt {
   font-size: 0.875rem;
-  color: #4B5563;
+  color: var(--text-secondary);
   margin-bottom: 0.75rem;
   flex: 1;
 }
@@ -81,7 +81,7 @@
   display: flex;
   align-items: center;
   font-size: 0.75rem;
-  color: #6B7280;
+  color: var(--text-secondary);
   margin-top: auto;
 }
 
