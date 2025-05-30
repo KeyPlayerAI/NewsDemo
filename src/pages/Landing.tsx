@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { NewspaperIcon, ActivityIcon, CloudIcon, CalendarIcon, CheckCircle, Users, Bell } from 'lucide-react';
 import { SubscriptionButton } from '../components/SubscriptionButton';
+import { Typewriter } from '../components/ui/typewriter';
 import { products } from '../stripe-config';
 import './Landing.css';
 
@@ -43,6 +44,25 @@ export const Landing: React.FC = () => {
                 <CheckCircle size={20} />
                 <span>Community Focused</span>
               </div>
+            </div>
+            <div className="typewriter-container">
+              <p className="whitespace-pre-wrap text-2xl md:text-3xl lg:text-4xl font-normal text-white mt-8">
+                <span>{"We're here to "}</span>
+                <Typewriter
+                  text={[
+                    "create impact",
+                    "share truth",
+                    "build trust",
+                    "inspire change",
+                    "lift up voices",
+                  ]}
+                  speed={70}
+                  className="text-blue-300"
+                  waitTime={1500}
+                  deleteSpeed={40}
+                  cursorChar={"_"}
+                />
+              </p>
             </div>
             <SubscriptionButton priceId={products['Carroll County News'].priceId} />
           </div>
