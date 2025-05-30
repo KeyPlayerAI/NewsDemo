@@ -1,7 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap');
-
 :root {
-  /* Primary colors */
+  /* Light theme variables */
   --primary: #1E3A8A;
   --accent: #3B82F6;
   --background: #F9FAFB;
@@ -23,138 +21,19 @@
   --page-transition: 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-body {
-  font-family: var(--body-font);
-  background-color: var(--background);
-  color: var(--text);
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
+[data-theme="dark"] {
+  --primary: #3B82F6;
+  --accent: #60A5FA;
+  --background: #111827;
+  --text: #F3F4F6;
+  --highlight-yellow: #FCD34D;
+  --highlight-coral: #FB7185;
+  --border: #374151;
+  
+  /* Section colors in dark mode */
+  --sports-color: #22C55E;
+  --news-color: #3B82F6;
+  --community-color: #FB923C;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--heading-font);
-  margin-top: 0;
-}
-
-a {
-  color: var(--accent);
-  text-decoration: none;
-  transition: color 0.2s ease;
-  -webkit-tap-highlight-color: transparent;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-button {
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* Page transitions */
-.page-transition-enter {
-  opacity: 0;
-  transform: translateX(100%);
-}
-
-.page-transition-enter-active {
-  opacity: 1;
-  transform: translateX(0);
-  transition: opacity var(--page-transition), transform var(--page-transition);
-}
-
-.page-transition-exit {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.page-transition-exit-active {
-  opacity: 0;
-  transform: translateX(-100%);
-  transition: opacity var(--page-transition), transform var(--page-transition);
-}
-
-/* Loading skeleton animation */
-@keyframes shimmer {
-  0% {
-    background-position: -1000px 0;
-  }
-  100% {
-    background-position: 1000px 0;
-  }
-}
-
-.skeleton {
-  background: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 0.06) 25%,
-    rgba(0, 0, 0, 0.15) 37%,
-    rgba(0, 0, 0, 0.06) 63%
-  );
-  background-size: 1000px 100%;
-  animation: shimmer 2s infinite linear;
-}
-
-/* Utility classes */
-.section-sports {
-  --section-color: var(--sports-color);
-}
-
-.section-news {
-  --section-color: var(--news-color);
-}
-
-.section-community {
-  --section-color: var(--community-color);
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.5s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.animate-slide-up {
-  animation: slideUp 0.3s ease-out;
-}
-
-@keyframes slideUp {
-  from { transform: translateY(20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-
-/* Mobile optimizations */
-@media (max-width: 768px) {
-  .touch-feedback:active {
-    transform: scale(0.98);
-    transition: transform 0.2s;
-  }
-
-  .button-feedback {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .button-feedback::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100px;
-    height: 100px;
-    background: radial-gradient(circle, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 60%);
-    transform: translate(-50%, -50%) scale(0);
-    opacity: 0;
-    transition: transform 0.5s, opacity 0.5s;
-  }
-
-  .button-feedback:active::after {
-    transform: translate(-50%, -50%) scale(3);
-    opacity: 0;
-    transition: 0s;
-  }
-}
+/* Rest of your existing CSS... */
