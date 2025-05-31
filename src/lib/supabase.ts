@@ -17,13 +17,31 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
     flowType: 'pkce',
     storage: localStorage,
   },
+  global: {
+    headers: {
+      'X-Client-Info': 'supabase-js/2.39.7',
+    },
+  },
+  db: {
+    schema: 'public',
+  },
+  realtime: {
+    params: {
+      eventsPerSecond: 10,
+    },
+  },
 });
 
-// Test storage access
+// Test storage access and Supabase connection
 try {
   localStorage.setItem('supabase-storage-test', 'test');
   localStorage.removeItem('supabase-storage-test');
   console.log('Local storage is accessible');
+  
+  // Test Supabase connection
+  supabase.from('stripe_customers').select('count').limit(1)
+    .then(() => console.log('Successfully connected to Supabase'))
+    .catch(error => console.error('Supabase connection error:', error));
 } catch (error) {
   console.warn('Local storage is not accessible:', error);
 }
