@@ -12,11 +12,20 @@
   html {
     -webkit-tap-highlight-color: transparent;
     height: -webkit-fill-available;
+    background-color: var(--background);
   }
 
   body {
     min-height: -webkit-fill-available;
     overscroll-behavior-y: none;
+    background-color: var(--background);
+    color: var(--text);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  #root {
+    min-height: 100vh;
+    background-color: var(--background);
   }
 
   /* Smooth scrolling for iOS */
@@ -38,7 +47,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.2);
+  background: var(--text-secondary);
   border-radius: 3px;
 }
 
